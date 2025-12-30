@@ -1,63 +1,67 @@
-import { NavLink } from "react-router-dom"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 const Header = () => {
-  const [open, setOpen] = useState(false)
-
-  const Link = ({ to, children }) => (
-    <NavLink
-      to={to}
-      className={({ isActive }) =>
-        isActive
-          ? "text-sky-800 border-b-2 border-sky-800 pb-1"
-          : "text-gray-700 hover:text-sky-800"
-      }
-      onClick={() => setOpen(false)}
-    >
-      {children}
-    </NavLink>
-  )
+  
 
   return (
-    <header className="bg-white border-b shadow-sm">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <div className="text-xl font-bold text-sky-800">Hope Hands</div>
-          </div>
+    <header className="bg-[#004B8D] h-16 flex items-center px-4 sm:px-6 shadow-md">
+      {/* Logo */}
+      <div className="flex items-center">
+        <Link to="/">
+          <img
+            src="/logo.png"
+            alt="NGOConnect Logo"
+            className="sm:h-14 sm:w-14 object-cover rounded-full border-2 border-white/80 bg-white shadow-sm"
+            aria-label="NGOConnect Home"
+            onError={(e) => {
+              e.target.src = 'https://via.placeholder.com/56?text=Logo';
+            }}
+          />
+        </Link>
+        <div className='text-2xl text-white px-4 font-bold'>NGOConnect
 
-          <div className="hidden md:flex md:items-center md:space-x-6">
-            <Link to="/">Home</Link>
-            <Link to="/donate">Donate</Link>
-            <Link to="/events">Events</Link>
-            <Link to="/contact">Contact</Link>
-          </div>
-
-          <div className="md:hidden">
-            <Button
-              onClick={() => setOpen(!open)}
-              aria-label="Toggle menu"
-              className="p-2 rounded-md text-gray-700 hover:bg-gray-100"
-            >
-             Menu
-            </Button>
-          </div>
         </div>
       </div>
 
-      {open && (
-        <nav className="md:hidden bg-white border-t">
-          <div className="px-4 py-3 flex flex-col space-y-2">
-            <Link to="/">Home</Link>
-            <Link to="/donate">Donate</Link>
-            <Link to="/events">Events</Link>
-            <Link to="/contact">Contact</Link>
-          </div>
-        </nav>
-      )}
+      {/* Navigation Links */}
+      <nav className="ml-auto">
+        <ul className="flex space-x-4 sm:space-x-6">
+          <li>
+            <Link
+              to="/"
+              className="text-white hover:text-[#FFDE73] transition-colors duration-200 text-sm sm:text-base"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/donate"
+              className="text-white hover:text-[#FFDE73] transition-colors duration-200 text-sm sm:text-base"
+            >
+              Donate
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/event"
+              className="text-white hover:text-[#FFDE73] transition-colors duration-200 text-sm sm:text-base"
+            >
+              Events
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/Contact"
+              className="text-white hover:text-[#FFDE73] transition-colors duration-200 text-sm sm:text-base"
+            >
+              Contact
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </header>
-  )
+  );
 }
 
 export default Header
